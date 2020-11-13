@@ -23,7 +23,7 @@ fun handleHttpException(context: Context, e: HttpException?, apiErrorListener: A
         return
 
     val errorJson = e.response()!!.errorBody()?.string()
-    val jsonObj = JSONObject(errorJson)
+    val jsonObj = JSONObject(errorJson.orEmpty())
 
     if (jsonObj.has("errors")) {
         val httpErrors = ArrayList<HttpError>()

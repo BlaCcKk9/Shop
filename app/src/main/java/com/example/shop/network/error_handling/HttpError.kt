@@ -1,6 +1,6 @@
 package com.example.shop.network.error_handling
 
-class HttpError(val code: String? = "", val message: String? = "", val data: Data? = null) {
+class HttpError(private val code: String? = "", val message: String? = "", val data: Data? = null) {
 
     companion object {
         const val UNAUTHORIZED = "401"

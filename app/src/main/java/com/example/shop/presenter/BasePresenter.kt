@@ -1,10 +1,15 @@
 package com.example.shop.presenter
 
+import android.text.TextUtils
+import com.example.shop.R
+import com.example.shop.network.error_handling.ApiErrorListener
+import com.example.shop.network.error_handling.HttpError
+import com.example.shop.network.error_handling.handleNetworkError
 import com.example.shop.view.BaseView
 import io.reactivex.disposables.CompositeDisposable
 import moxy.MvpPresenter
 
-class BasePresenter<T : BaseView> : MvpPresenter<T>() {
+abstract class BasePresenter<T : BaseView> : MvpPresenter<T>(), ApiErrorListener {
 
     private var utilityWrapper: UtilityWrapper = UtilityWrapper()
 
@@ -14,6 +19,69 @@ class BasePresenter<T : BaseView> : MvpPresenter<T>() {
 
     fun applicationContext() = utilityWrapper.applicationContext
 
+    private var isResume: Boolean = false
+
+
+    override fun onFirstViewAttach() {
+        // something
+        super.onFirstViewAttach()
+    }
+
+    override fun onDestroy() {
+        //something
+        super.onDestroy()
+    }
+
+
+    override fun onHttpError(error: HttpError) {
+        when {
+            error.isUnauthorized() -> {
+                viewState.toastShort(R.string.network_error_unauthorized)
+            }
+            error.isServerError() -> {
+                viewState.toastShort(R.string.network_error_server)
+            }
+            !TextUtils.isEmpty(error.message) -> {
+                viewState.toastShort(error.message!!)
+            }
+        }
+    }
+
+    override fun onNoInternetConnection() {
+        viewState.showNoInternetConnectionError()
+    }
+
+    override fun onGenericError(t: Throwable?) {
+        if (t != null && t.localizedMessage != null) {
+            viewState.toastLong(t.localizedMessage.orEmpty())
+        }
+    }
+
+    override fun onHttpErrors(errors: Collection<HttpError>) {
+        var msg = ""
+        errors.map { it.message }
+            .forEach {
+                msg += it
+            }
+
+        if (!TextUtils.isEmpty(msg)) {
+            viewState.toastLong(msg)
+        }
+    }
+
+    open fun onResume() {
+        isResume = true
+    }
+
+    open fun onPause() {
+        isResume = false
+    }
+
+    open fun handleError(t: Throwable?) {
+//        viewState.hideProgress()
+        t?.printStackTrace()
+        handleNetworkError(applicationContext(), t, this)
+    }
 
 
 
