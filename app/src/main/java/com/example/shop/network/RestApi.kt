@@ -1,6 +1,7 @@
 package com.example.shop.network
 
 import android.content.Context
+import com.example.shop.network.services.ShopService
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -21,6 +22,8 @@ class RestApi @Inject constructor(context: Context) {
     }
 
     private lateinit var retrofit: Retrofit
+
+    lateinit var shopService: ShopService
 
 
     init {
@@ -49,7 +52,7 @@ class RestApi @Inject constructor(context: Context) {
     }
 
     private fun initServices(){
-
+        shopService = retrofit.create(ShopService::class.java)
     }
 
     inner class RequestInterceptor : okhttp3.Interceptor {
