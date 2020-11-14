@@ -31,4 +31,5 @@ class MainPresenter : BasePresenter<MainView>() {
         currentTabName = Consts.MainTab.PROFILE
         viewState.openProfilePage()
     }
+
 }

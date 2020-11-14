@@ -45,8 +45,8 @@ class ShopAdapter(private val shops: List<Shops>, private val listener: ShopClic
 
         fun bind(shops: Shops){
             itemView.apply {
+                setupTodayWorkingHours(shops.workingHours!!.first())
                 setupBackgroundImage(shops.backgroundUrl)
-                setupTodayWorkingHours(shops.workingHours!!)
                 ivShopIcon.setImage(shops.logoUrl)
                 tvName.text = shops.name
                 tvIsActive.text = if (shops.isActive) "" else "no delivery"
@@ -55,6 +55,15 @@ class ShopAdapter(private val shops: List<Shops>, private val listener: ShopClic
                 setOnClickListener { listener.onShopClicked(shops) }
             }
         }
+
+        @SuppressLint("SetTextI18n")
+        private fun setupTodayWorkingHours(todayWorkingHours: WorkingHours){
+            itemView.tvDayTime.text = if (todayWorkingHours.working) todayWorkingHours.day + " " + getTimeToString(todayWorkingHours.from) + " - " + getTimeToString(todayWorkingHours.to) else "არ მუშაობს"
+        }
+
+
+        // არ მკითხოთ რატო ;დ
+        private fun getTimeToString(time: String): String = time.dropLast(3)
 
         @SuppressLint("CheckResult")
         private fun setupBackgroundImage(url: String){
@@ -73,15 +82,8 @@ class ShopAdapter(private val shops: List<Shops>, private val listener: ShopClic
                 })
         }
 
-        @SuppressLint("SetTextI18n")
-        private fun setupTodayWorkingHours(workingHours: List<WorkingHours>){
-            itemView.tvDayTime.text = if (workingHours[0].working) workingHours[0].day + " " + getTimeToString(workingHours[0].from) + " - " + getTimeToString(workingHours[0].to) else "არ მუშაობს"
-        }
-
-
-        // არ მკითხოთ რატო ;დ
-        private fun getTimeToString(time: String): String = time.dropLast(3)
-
     }
+
+
 
 }

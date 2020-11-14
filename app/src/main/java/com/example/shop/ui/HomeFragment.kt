@@ -1,7 +1,9 @@
 package com.example.shop.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shop.R
@@ -27,6 +29,15 @@ class HomeFragment : BaseMainNavigationFragment(), HomeView {
 
     override fun setupShopsAdapter(adapter: ShopAdapter) {
         rvShops.adapter = adapter
+    }
+
+    override fun printSelectedShopName(shopName: String) {
+        Log.d("Shop Name: ", shopName)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
     }
 
 }

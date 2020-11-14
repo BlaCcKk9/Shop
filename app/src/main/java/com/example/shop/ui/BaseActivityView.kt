@@ -71,10 +71,4 @@ abstract class BaseActivityView : MvpAppCompatActivity(), BaseView {
     private fun showInternetSettingsScreen() {
         startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
     }
-
-    override fun openSplashScreen() {
-        val intent = MainActivity.createIntent(applicationContext)
-        startActivity(intent)
-//        startActivity(SplashActivity.createIntent(this))
-    }
 }

@@ -85,8 +85,6 @@ abstract class BaseFragmentView : MvpAppCompatFragment(), BaseView {
         startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
     }
 
-    override fun openSplashScreen() {
-        // realized in activity
-    }
+
 
 }

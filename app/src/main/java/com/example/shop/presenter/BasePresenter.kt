@@ -28,11 +28,7 @@ abstract class BasePresenter<T : BaseView> : MvpPresenter<T>(), ApiErrorListener
 
 
     override fun onFirstViewAttach() {
-//        if (!isOpenNewScreenFlow) {
-//            isOpenNewScreenFlow = true
-//            viewState.openSplashScreen()
-//        }
-//        openMainScreen()
+        super.onFirstViewAttach()
     }
 
     override fun onDestroy() {
@@ -90,14 +86,4 @@ abstract class BasePresenter<T : BaseView> : MvpPresenter<T>(), ApiErrorListener
         t?.printStackTrace()
         handleNetworkError(applicationContext(), t, this)
     }
-
-    private fun openMainScreen(){
-        if (!isOpenNewScreenFlow) {
-            isOpenNewScreenFlow = true
-            viewState.openSplashScreen()
-        }
-    }
-
-
-
 }

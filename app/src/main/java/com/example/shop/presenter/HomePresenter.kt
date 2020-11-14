@@ -1,5 +1,6 @@
 package com.example.shop.presenter
 
+import android.util.Log
 import android.widget.Toast
 import com.example.shop.interfaces.ShopClickListener
 import com.example.shop.adapter.ShopAdapter
@@ -24,6 +25,11 @@ class HomePresenter : BaseMainNavigationPresenter<HomeView>(), ShopClickListener
         loadShops()
     }
 
+    override fun onResume() {
+        super.onResume()
+        loadShops()
+    }
+
     private fun loadShops(){
         restApi().shopService
             .getShops()
@@ -44,6 +50,6 @@ class HomePresenter : BaseMainNavigationPresenter<HomeView>(), ShopClickListener
     }
 
     override fun onShopClicked(shop: Shops) {
-        Toast.makeText(applicationContext(), shop.name, Toast.LENGTH_SHORT).show()
+        viewState.printSelectedShopName(shop.name)
     }
 }
