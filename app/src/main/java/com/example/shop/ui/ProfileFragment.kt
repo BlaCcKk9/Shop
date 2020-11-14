@@ -17,7 +17,7 @@ class ProfileFragment : BaseMainNavigationFragment(), ProfileView {
     @InjectPresenter
     override lateinit var presenter: ProfilePresenter
 
-    override fun getLayoutResID(): Int = R.layout.fragment_home
+    override fun getLayoutResID(): Int = R.layout.fragment_profile
 
     override fun setupView(savedInstanceState: Bundle?) {
         // do something

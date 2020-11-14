@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.shop.R
 import com.example.shop.interfaces.ShopClickListener
 import com.example.shop.model.data.Shops
+import com.example.shop.model.data.WorkingHours
 import com.example.shop.utils.setImage
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -45,9 +46,12 @@ class ShopAdapter(private val shops: List<Shops>, private val listener: ShopClic
         fun bind(shops: Shops){
             itemView.apply {
                 setupBackgroundImage(shops.backgroundUrl)
+                setupTodayWorkingHours(shops.workingHours!!)
                 ivShopIcon.setImage(shops.logoUrl)
                 tvName.text = shops.name
                 tvIsActive.text = if (shops.isActive) "" else "no delivery"
+                ratingBar.rating = shops.averageRating?.toFloat() ?: 0.0f
+                tvReviewCount.text = shops.reviewsCount.toString()
                 setOnClickListener { listener.onShopClicked(shops) }
             }
         }
@@ -55,7 +59,6 @@ class ShopAdapter(private val shops: List<Shops>, private val listener: ShopClic
         @SuppressLint("CheckResult")
         private fun setupBackgroundImage(url: String){
             Single.fromCallable {
-                // Here we load a simple string from the web service.
                 val url = URL(url)
                 val connection = url.openConnection()
                 var inputStream = connection.getInputStream()
@@ -64,12 +67,21 @@ class ShopAdapter(private val shops: List<Shops>, private val listener: ShopClic
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ text ->
-                    // And then we display it.
-//                    Glide.with(context).load(BitmapDrawable(context.resources, text)).into(itemView.ivBackground)
                     itemView.ivBackground.background = BitmapDrawable(context.resources, text)
                 }, {
                     it.printStackTrace()
                 })
         }
+
+        @SuppressLint("SetTextI18n")
+        private fun setupTodayWorkingHours(workingHours: List<WorkingHours>){
+            itemView.tvDayTime.text = if (workingHours[0].working) workingHours[0].day + " " + getTimeToString(workingHours[0].from) + " - " + getTimeToString(workingHours[0].to) else "არ მუშაობს"
+        }
+
+
+        // არ მკითხოთ რატო ;დ
+        private fun getTimeToString(time: String): String = time.dropLast(3)
+
     }
+
 }

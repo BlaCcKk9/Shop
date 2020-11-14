@@ -1,17 +1,14 @@
 package com.example.shop.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.shop.R
 import com.example.shop.adapter.ShopAdapter
-import com.example.shop.presenter.BasePresenter
 import com.example.shop.presenter.HomePresenter
-import com.example.shop.view.BaseView
 import com.example.shop.view.HomeView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import moxy.presenter.InjectPresenter
 
@@ -25,6 +22,7 @@ class HomeFragment : BaseMainNavigationFragment(), HomeView {
 
     override fun setupView(savedInstanceState: Bundle?) {
         rvShops.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     override fun setupShopsAdapter(adapter: ShopAdapter) {

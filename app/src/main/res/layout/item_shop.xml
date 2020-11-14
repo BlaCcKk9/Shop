@@ -9,11 +9,27 @@
     android:layout_width="match_parent"
     android:layout_height="230dp">
 
+
     <ImageView
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/ivBackground"
         android:layout_width="match_parent"
         android:layout_height="140dp"/>
+
+    <TextView
+        android:id="@+id/tvDayTime"
+        android:text="ხუთშაბათი 22:30 - 05:00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/black_trasparent_20"
+        app:layout_constraintTop_toTopOf="@+id/ivBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBackground"
+        app:layout_constraintStart_toStartOf="@+id/ivBackground"
+        app:layout_constraintEnd_toEndOf="@+id/ivBackground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
 
     <ImageView
         android:layout_marginTop="12dp"
@@ -46,6 +62,29 @@
         android:layout_marginStart="@dimen/main_padding"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_marginEnd="5dp"
+        android:rating="4.435345"
+        android:progressTint="#FFA500"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        app:layout_constraintEnd_toStartOf="@+id/tvReviewCount"
+        app:layout_constraintTop_toTopOf="@+id/tvIsActive"
+        app:layout_constraintBottom_toBottomOf="@+id/tvIsActive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvReviewCount"
+        android:text="45"
+        android:textColor="@color/black"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvIsActive"
+        app:layout_constraintBottom_toBottomOf="@+id/tvIsActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

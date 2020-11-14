@@ -15,9 +15,11 @@ import com.example.shop.main_screen_state.MainScreenState
 import com.example.shop.main_screen_state.OrdersState
 import com.example.shop.main_screen_state.ProfileState
 import com.example.shop.presenter.MainPresenter
+import com.example.shop.utils.transparentStatusAndNavigation
 import com.example.shop.view.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 import moxy.presenter.InjectPresenter
+
 
 class MainActivity : BaseActivityView(), MainView {
 
@@ -39,6 +41,7 @@ class MainActivity : BaseActivityView(), MainView {
     override fun getLayoutResID(): Int = R.layout.activity_main
 
     override fun setupView(savedInstanceState: Bundle?) {
+        transparentStatusAndNavigation(this)
         setupToolbars()
         setupNavigationView()
         openHomePage()
@@ -56,11 +59,11 @@ class MainActivity : BaseActivityView(), MainView {
         fragment.toolbar = toolbar
     }
 
-    private fun setupNavigationView(){
+    private fun setupNavigationView() {
         val navigationAdapter = AHBottomNavigationAdapter(this, R.menu.menu_activity_main)
             .apply { setupWithBottomNavigation(navigationView) }
         navigationView.apply {
-            isBehaviorTranslationEnabled = false
+            isBehaviorTranslationEnabled = true
             accentColor = ContextCompat.getColor(this@MainActivity, R.color.bottom_nav_color)
             for (index in 0 until itemsCount - 1)
                 setNotification(AHNotification(), index)

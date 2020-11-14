@@ -8,4 +8,5 @@
     <color name="black">#000</color>
     <color name="orders_tab_indicator_color">#b2ecdf</color>
     <color name="grey">#787D88</color>
+    <color name="black_trasparent_20">#33000000</color>
 </resources>
