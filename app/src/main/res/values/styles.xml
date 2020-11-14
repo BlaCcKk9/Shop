@@ -1,10 +1,15 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActivityTransitions" tools:ignore="NewApi">true</item>
+        <item name="android:contentInsetStart" tools:ignore="NewApi">0dp</item>
+        <item name="android:contentInsetEnd" tools:ignore="NewApi">0dp</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
     </style>
 
     <style name="OrdersTabText" parent="TextAppearance.Design.Tab">
@@ -20,6 +25,13 @@
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor" tools:ignore="NewApi">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
     </style>
 
 </resources>

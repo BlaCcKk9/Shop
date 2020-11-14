@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigationItemHome"
+        android:icon="@drawable/ic_home_main_nav"
+        android:titleCondensed="true"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigationItemOrders"
+        android:icon="@drawable/ic_orders_main_nav"
+        android:title="" />
+
+    <item
+        android:id="@+id/navigationItemProfile"
+        android:icon="@drawable/ic_profile_main_nav"
+        android:title="" />
+</menu>

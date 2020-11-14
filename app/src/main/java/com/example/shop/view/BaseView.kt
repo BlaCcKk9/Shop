@@ -11,4 +11,5 @@ interface BaseView : MvpView {
     fun toastLong(msg: String)
     fun toastLong(resId: Int)
     fun showNoInternetConnectionError()
+    fun openSplashScreen()
 }

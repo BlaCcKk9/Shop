@@ -1,13 +1,17 @@
 package com.example.shop.presenter
 
 import android.text.TextUtils
+import android.widget.Toast
 import com.example.shop.R
 import com.example.shop.network.error_handling.ApiErrorListener
 import com.example.shop.network.error_handling.HttpError
 import com.example.shop.network.error_handling.handleNetworkError
+import com.example.shop.ui.MainActivity
 import com.example.shop.view.BaseView
 import io.reactivex.disposables.CompositeDisposable
 import moxy.MvpPresenter
+import org.jetbrains.anko.internals.AnkoInternals.createIntent
+import org.jetbrains.anko.internals.AnkoInternals.internalStartActivity
 
 abstract class BasePresenter<T : BaseView> : MvpPresenter<T>(), ApiErrorListener {
 
@@ -20,15 +24,19 @@ abstract class BasePresenter<T : BaseView> : MvpPresenter<T>(), ApiErrorListener
     fun applicationContext() = utilityWrapper.applicationContext
 
     private var isResume: Boolean = false
+    private var isOpenNewScreenFlow = false
 
 
     override fun onFirstViewAttach() {
-        // something
-        super.onFirstViewAttach()
+//        if (!isOpenNewScreenFlow) {
+//            isOpenNewScreenFlow = true
+//            viewState.openSplashScreen()
+//        }
+//        openMainScreen()
     }
 
     override fun onDestroy() {
-        //something
+        subscription.dispose()
         super.onDestroy()
     }
 
@@ -81,6 +89,13 @@ abstract class BasePresenter<T : BaseView> : MvpPresenter<T>(), ApiErrorListener
 //        viewState.hideProgress()
         t?.printStackTrace()
         handleNetworkError(applicationContext(), t, this)
+    }
+
+    private fun openMainScreen(){
+        if (!isOpenNewScreenFlow) {
+            isOpenNewScreenFlow = true
+            viewState.openSplashScreen()
+        }
     }
 
 
